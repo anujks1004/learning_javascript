@@ -74,23 +74,38 @@ const menu = [
 ];
 
 const sectionCenter = document.querySelector(".section-center");
-const filterBtns = document.querySelectorAll(".filter-btn");
+const container = document.querySelector(".btn-container");
 
 window.addEventListener("DOMContentLoaded", function () {
   sectionCenter.innerHTML = displayMenuItems(menu);
-});
-
-filterBtns.forEach(function (btn) {
-  btn.addEventListener("click", function () {
-    let currMenu = menu.filter(function (item) {
-      return item.category == btn.innerHTML;
+  const categories = menu.reduce(
+    function (values, item) {
+      if (!values.includes(item.category)) values.push(item.category);
+      return values;
+    },
+    ["all"]
+  );
+  const categoryBtns = categories
+    .map(function (category) {
+      return `<button class="filter-btn" type="button">${category}</button>`;
+    })
+    .join("");
+  container.innerHTML = categoryBtns;
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      let currMenu = menu.filter(function (item) {
+        return item.category == btn.innerHTML;
+      });
+      if (btn.innerHTML == "all")
+        sectionCenter.innerHTML = displayMenuItems(menu);
+      else sectionCenter.innerHTML = displayMenuItems(currMenu);
     });
-    sectionCenter.innerHTML = displayMenuItems(currMenu);
   });
 });
 
 function displayMenuItems(menuItems) {
-  return menu
+  return menuItems
     .map(function (item) {
       return `<article class="menu-item">
           <img src="${item.img}" class="photo" alt="" />
