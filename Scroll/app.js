@@ -5,12 +5,18 @@
 
 // ********** set date ************
 const date = document.querySelector("#date");
-var currentDate = new Date();
-var currentYear = currentDate.getFullYear();
-
-date.innerHTML = currentYear;
+date.innerHTML = new Date().getFullYear();
 // ********** close links ************
+const linksContainer = document.querySelector(".links-container");
+const navToggle = document.querySelector(".nav-toggle");
+const links = document.querySelector(".links");
 
+navToggle.addEventListener("click", function () {
+  const containerHeight = linksContainer.getBoundingClientRect().height;
+  const linkHeight = links.getBoundingClientRect().height;
+  if (containerHeight == 0) linksContainer.style.height = `${linkHeight}px`;
+  else linksContainer.style.height = 0;
+});
 // ********** fixed navbar ************
 
 // ********** smooth scroll ************
