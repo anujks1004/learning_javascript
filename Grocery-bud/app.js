@@ -58,6 +58,13 @@ function displayAlert(text, action) {
   }, 1000);
 }
 
+function setBackToDefault() {
+  grocery.value = "";
+  editFlag = false;
+  editId = "";
+  submitBtn.textContent = "submit";
+}
+
 // ****** LOCAL STORAGE **********
 
 // ****** SETUP ITEMS **********
