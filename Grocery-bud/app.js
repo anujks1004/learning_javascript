@@ -45,9 +45,12 @@ function addItem(e) {
     list.appendChild(element);
     displayAlert("item added to the list", "success");
     container.classList.add("show-container");
-    addToLocalStorage(id, value);
+    // addToLocalStorage(id, value);
     setBackToDefault();
   } else if (value && editFlag) {
+    editElement.innerHTML = value;
+    displayAlert("value changed", "success");
+    setBackToDefault();
   } else {
     displayAlert("Please enter value", "danger");
   }
@@ -82,7 +85,14 @@ function deleteItem(e) {
   setBackToDefault();
 }
 
-function editItem() {}
+function editItem(e) {
+  const element = e.currentTarget.parentElement.parentElement;
+  editElement = e.currentTarget.parentElement.previousElementSibling;
+  grocery.value = editElement.innerHTML;
+  editFlag = true;
+  editId = element.dataset.id;
+  submitBtn.textContent = "edit";
+}
 
 function setBackToDefault() {
   grocery.value = "";
