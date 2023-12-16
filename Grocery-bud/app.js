@@ -16,7 +16,7 @@ let editId = "";
 // ****** EVENT LISTENERS **********
 
 form.addEventListener("submit", addItem);
-
+clearBtn.addEventListener("click", clearItems);
 // ****** FUNCTIONS **********
 
 function addItem(e) {
@@ -56,6 +56,18 @@ function displayAlert(text, action) {
     alert.textContent = "";
     alert.classList.remove(`alert-${action}`);
   }, 1000);
+}
+
+function clearItems() {
+  const items = document.querySelectorAll(".grocery-item");
+  if (items.length > 0) {
+    items.forEach(function (item) {
+      list.removeChild(item);
+    });
+  }
+  container.classList.remove("show-container");
+  displayAlert("empty list", "danger");
+  setBackToDefault();
 }
 
 function setBackToDefault() {
