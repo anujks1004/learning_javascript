@@ -38,6 +38,10 @@ function addItem(e) {
                 <i class="fas fa-trash"></i>
               </button>
             </div>`;
+    const deleteBtn = element.querySelector(".delete-btn");
+    const editBtn = element.querySelector(".edit-btn");
+    deleteBtn.addEventListener("click", deleteItem);
+    editBtn.addEventListener("click", editItem);
     list.appendChild(element);
     displayAlert("item added to the list", "success");
     container.classList.add("show-container");
@@ -69,6 +73,16 @@ function clearItems() {
   displayAlert("empty list", "danger");
   setBackToDefault();
 }
+
+function deleteItem(e) {
+  const element = e.currentTarget.parentElement.parentElement;
+  list.removeChild(element);
+  if (list.children.length == 0) container.classList.remove("show-container");
+  displayAlert("item deleted", "danger");
+  setBackToDefault();
+}
+
+function editItem() {}
 
 function setBackToDefault() {
   grocery.value = "";
