@@ -45,11 +45,12 @@ function addItem(e) {
     list.appendChild(element);
     displayAlert("item added to the list", "success");
     container.classList.add("show-container");
-    // addToLocalStorage(id, value);
+    addToLocalStorage(id, value);
     setBackToDefault();
   } else if (value && editFlag) {
     editElement.innerHTML = value;
     displayAlert("value changed", "success");
+    editLocalStorage(editId, value);
     setBackToDefault();
   } else {
     displayAlert("Please enter value", "danger");
@@ -102,5 +103,18 @@ function setBackToDefault() {
 }
 
 // ****** LOCAL STORAGE **********
+
+function addToLocalStorage(id, value) {
+  const grocery = { id, value };
+  let items = getLocalStorage();
+  items.push(grocery);
+  localStorage.setItem("list", JSON.stringify(items));
+}
+
+function getLocalStorage() {
+  return localStorage.getItem("list")
+    ? JSON.parse(localStorage.getItem("list"))
+    : [];
+}
 
 // ****** SETUP ITEMS **********
