@@ -80,10 +80,12 @@ function clearItems() {
 
 function deleteItem(e) {
   const element = e.currentTarget.parentElement.parentElement;
+  const id = element.dataset.id;
   list.removeChild(element);
   if (list.children.length == 0) container.classList.remove("show-container");
   displayAlert("item deleted", "danger");
   setBackToDefault();
+  removeFromLocalStorage(id);
 }
 
 function editItem(e) {
@@ -127,6 +129,14 @@ function editLocalStorage(id, value) {
     return item;
   });
   localStorage.setItem("list", JSON.stringify(items));
+}
+
+function removeFromLocalStorage(id) {
+  let items = getLocalStorage();
+  items = items.filter(function (item) {
+    if (item.id !== id) return item;
+    localStorage.setItem("list", JSON.stringify(items));
+  });
 }
 
 // ****** SETUP ITEMS **********
