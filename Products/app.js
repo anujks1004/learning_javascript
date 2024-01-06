@@ -16,7 +16,7 @@ const fetchProducts = async () => {
 const displayProducts = (list) => {
   const productList = list
     .map((item) => {
-      return `<a href="product.html" class="single-product">
+      return `<a href="product.html?id=${item.id}" class="single-product">
             <img src="${
               item.fields.image[0].url
             }" alt="" class="single-product-img img" />
