@@ -22,6 +22,7 @@ const displayDrinks = ({ drinks }) => {
     .join("");
   hideLoading();
   title.textContent = "";
+  return section;
   return;
 };
 
