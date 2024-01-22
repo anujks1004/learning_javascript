@@ -10,7 +10,8 @@ import { getElement } from "./src/utils.js";
 
 const init = async () => {
   const products = await fetchProducts();
-  console.log(products);
+  setupStore(products);
+  console.log(store);
 };
 
 window.addEventListener("DOMContentLoaded", init);
