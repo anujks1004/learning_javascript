@@ -15,3 +15,4 @@ import { getElement } from "../utils.js";
 
 display(store, getElement(".products-container"));
 setupSearch(store);
+setupCompanies(store);
