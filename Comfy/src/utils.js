@@ -17,8 +17,6 @@ const getElement = (selection) => {
   );
 };
 
-const formatPrice = () => {};
-
 const getStorageItem = (item) => {
   let storageItem = localStorage.getItem(item);
   if (storageItem) storageItem = JSON.parse(localStorage.getItem(item));
@@ -33,7 +31,6 @@ export {
   allProductsUrl,
   singleProductUrl,
   getElement,
-  formatPrice,
   getStorageItem,
   setStorageItem,
 };
