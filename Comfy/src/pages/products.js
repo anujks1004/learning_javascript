@@ -14,3 +14,4 @@ import display from "../displayProducts.js";
 import { getElement } from "../utils.js";
 
 display(store, getElement(".products-container"));
+setupSearch(store);
