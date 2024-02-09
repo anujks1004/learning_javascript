@@ -16,7 +16,9 @@ export const addToCart = (id) => {
   if (!item) {
     let product = findProduct(id);
     product = { ...product, amount: 1 };
+    console.log(product);
     cart = [...cart, product];
+    console.log(cart);
     addToCartDOM(product);
   } else {
   }
