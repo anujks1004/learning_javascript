@@ -21,10 +21,57 @@ export const addToCart = (id) => {
     console.log(cart);
     addToCartDOM(product);
   } else {
+    const amount = increaseAmount(id);
+    const items = [...cartItemsDOM.querySelectorAll(".cart-item-amount")];
+    const newAmount = items.find((value) => {
+      return value.dataset.id == id;
+    });
+    console.log(newAmount);
+    newAmount.textContent = amount;
   }
+  displayCartItemCount();
+  displayCartTotal();
+  setStorageItem("cart", cart);
   openCart();
 };
 
-const init = () => {};
+const displayCartItemCount = () => {
+  const amount = cart.reduce((total, cartItem) => {
+    return (total += cartItem.amount);
+  }, 0);
+  cartItemCountDOM.textContent = amount;
+};
+
+const displayCartTotal = () => {
+  let total = cart.reduce((total, cartItem) => {
+    return (total += cartItem.price * cartItem.amount);
+  }, 0);
+  cartTotalDOM.textContent = `Total : $${total / 100}`;
+};
+const displayCartItemsDOM = () => {
+  cart.forEach((cartItem) => {
+    addToCartDOM(cartItem);
+  });
+};
+const setupCartFunctionality = () => {};
+
+const increaseAmount = (id) => {
+  let newAmount;
+  cart = cart.map((cartItem) => {
+    if (cartItem.id == id) {
+      newAmount = cartItem.amount + 1;
+      cartItem = { ...cartItem, amount: newAmount };
+    }
+    return cartItem;
+  });
+  return newAmount;
+};
+
+const init = () => {
+  displayCartItemCount();
+  displayCartTotal();
+  displayCartItemsDOM();
+  setupCartFunctionality();
+};
 
 init();
