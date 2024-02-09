@@ -53,7 +53,25 @@ const displayCartItemsDOM = () => {
     addToCartDOM(cartItem);
   });
 };
-const setupCartFunctionality = () => {};
+const setupCartFunctionality = () => {
+  cartItemsDOM.addEventListener("click", (event) => {
+    const element = event.target;
+    const parent = element.parentElement;
+    const id = element.dataset.id;
+    const parentID = parent.dataset.id;
+    if (element.classList.contains("cart-item-remove-btn")) {
+      removeItem(id);
+      parent.parentElement.remove();
+    }
+    displayCartItemCount();
+    displayCartTotal();
+    setStorageItem("cart", cart);
+  });
+};
+
+const removeItem = (id) => {
+  cart = cart.filter((cartItem) => cartItem.id != id);
+};
 
 const increaseAmount = (id) => {
   let newAmount;
