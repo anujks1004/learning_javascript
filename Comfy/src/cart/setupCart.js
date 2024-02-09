@@ -61,7 +61,18 @@ const setupCartFunctionality = () => {
     const parentID = parent.dataset.id;
     if (element.classList.contains("cart-item-remove-btn")) {
       removeItem(id);
-      parent.parentElement.remove();
+      parent.parentElement.parentElement.remove();
+    } else if (parent.classList.contains("cart-item-increase-btn")) {
+      const newAmount = increaseAmount(parentID);
+      parent.nextElementSibling.textContent = newAmount;
+    } else if (parent.classList.contains("cart-item-decrease-btn")) {
+      const newAmount = decreaseAmount(parentID);
+      if (newAmount == 0) {
+        removeItem(parentID);
+        parent.parentElement.parentElement.remove();
+      } else {
+        parent.previousElementSibling.textContent = newAmount;
+      }
     }
     displayCartItemCount();
     displayCartTotal();
@@ -78,6 +89,18 @@ const increaseAmount = (id) => {
   cart = cart.map((cartItem) => {
     if (cartItem.id == id) {
       newAmount = cartItem.amount + 1;
+      cartItem = { ...cartItem, amount: newAmount };
+    }
+    return cartItem;
+  });
+  return newAmount;
+};
+
+const decreaseAmount = (id) => {
+  let newAmount;
+  cart = cart.map((cartItem) => {
+    if (cartItem.id == id) {
+      newAmount = cartItem.amount - 1;
       cartItem = { ...cartItem, amount: newAmount };
     }
     return cartItem;
